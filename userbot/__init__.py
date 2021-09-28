@@ -50,11 +50,11 @@ CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 
 if CONSOLE_LOGGER_VERBOSE:
     basicConfig(
-        format="[ Man-Userbot ] - [ %(levelname)s ] - %(message)s",
+        format="[Man-Userbot] - [%(levelname)s] - %(message)s",
         level=DEBUG,
     )
 else:
-    basicConfig(format="[ Man-Userbot ] - [ %(levelname)s ] - %(message)s",
+    basicConfig(format="[Man-Userbot] - [%(levelname)s] - %(message)s",
                 level=INFO)
 LOGS = getLogger(__name__)
 
