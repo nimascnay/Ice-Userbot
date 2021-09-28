@@ -50,16 +50,16 @@ CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 
 if CONSOLE_LOGGER_VERBOSE:
     basicConfig(
-        format="%(name)s - %(levelname)s - %(message)s",
+        format="[ Man-Userbot ] - [ %(levelname)s ] - %(message)s",
         level=DEBUG,
     )
 else:
-    basicConfig(format="%(name)s - %(levelname)s - %(message)s",
+    basicConfig(format="[ Man-Userbot ] - [ %(levelname)s ] - %(message)s",
                 level=INFO)
 LOGS = getLogger(__name__)
 
-if version_info[0] < 3 or version_info[1] < 8:
-    LOGS.info("Anda HARUS memiliki versi python setidaknya 3.8."
+if version_info[0] < 3 or version_info[1] < 9:
+    LOGS.info("Anda HARUS memiliki versi python setidaknya 3.9."
               "Beberapa fitur tergantung pada ini. Bot berhenti.")
     sys.exit(1)
 
