@@ -10,7 +10,7 @@ from importlib import import_module
 
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
 
-from userbot import LOGS, bot
+from userbot import ALIVE_NAME, BOT_VER, LOGS, bot
 from userbot.modules import ALL_MODULES
 
 INVALID_PH = (
@@ -28,7 +28,7 @@ for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
 LOGS.info(
-    "Bila Kamu Butuh Bantuan, Gabung ke Grup https://t.me/SharingUserbot")
+    f"Jika {ALIVE_NAME} Membutuhkan Bantuan, Gabung ke Grup https://t.me/SharingUserbot")
 
 LOGS.info(
     f"Man-Userbot ⚙️ V{BOT_VER} [🔥 BERHASIL DIAKTIFKAN! 🔥]")
