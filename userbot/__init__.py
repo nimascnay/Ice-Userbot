@@ -371,7 +371,9 @@ def paginate_help(page_number, loaded_modules, prefix):
     helpable_modules = [p for p in loaded_modules if not p.startswith("_")]
     helpable_modules = sorted(helpable_modules)
     modules = [
-        custom.Button.inline("{} {} ✘".format("✘", x), data="ub_modul_{}".format(x))
+        custom.Button.inline(
+    "{} {} ✘".format(
+        "✘", x), data="ub_modul_{}".format(x))
         for x in helpable_modules
     ]
     pairs = list(
@@ -479,25 +481,25 @@ with bot:
                                                ]
                                            ]
 
-        @tgbot.on(events.NewMessage(pattern=r"/ping"))
+        @ tgbot.on(events.NewMessage(pattern=r"/ping"))
         async def handler(event):
             if event.message.from_id != uid:
-                start = datetime.now()
-                end = datetime.now()
-                ms = (end - start).microseconds / 1000
+                start=datetime.now()
+                end=datetime.now()
+                ms=(end - start).microseconds / 1000
                 await tgbot.send_message(
                     event.chat_id,
                     f"🏓 **Pong!!**\n`{ms}ms`",
                 )
 
-        @tgbot.on(events.InlineQuery)
+        @ tgbot.on(events.InlineQuery)
         async def inline_handler(event):
-            builder = event.builder
-            result = None
-            query = event.text
+            builder=event.builder
+            result=None
+            query=event.text
             if event.query.user_id == uid and query.startswith("@UserButt"):
-                buttons = paginate_help(0, dugmeler, "helpme")
-                result = builder.article(
+                buttons=paginate_help(0, dugmeler, "helpme")
+                result=builder.article(
                     "Harap Gunakan .help Untuk Perintah",
                     text="{}\n\n**✥ Jumlah Module Yang Tersedia :** `{}` **Module**\n               \n**✥ Daftar Modul Man-Userbot :** \n".format(
                         "**✗ Man-Userbot Main Menu ✗**",
@@ -507,7 +509,7 @@ with bot:
                     link_preview=False,
                 )
             elif query.startswith("repo"):
-                result = builder.article(
+                result=builder.article(
                     title="Repository",
                     description="Repository Man - Userbot",
                     url="https://t.me/SharingUserbot",
@@ -525,7 +527,7 @@ with bot:
                     link_preview=False,
                 )
             else:
-                result = builder.article(
+                result=builder.article(
                     title="✗ Man-Userbot ✗",
                     description="Man - UserBot | Telethon",
                     url="https://t.me/SharingUserbot",
@@ -544,62 +546,62 @@ with bot:
                 )
             await event.answer([result] if result else None)
 
-        @tgbot.on(
+        @ tgbot.on(
             events.callbackquery.CallbackQuery(
                 data=re.compile(rb"helpme_next\((.+?)\)")
             )
         )
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
-                current_page_number = int(
+                current_page_number=int(
                     event.data_match.group(1).decode("UTF-8"))
-                buttons = paginate_help(
+                buttons=paginate_help(
                     current_page_number + 1, dugmeler, "helpme")
                 # https://t.me/TelethonChat/115200
                 await event.edit(buttons=buttons)
             else:
-                reply_pop_up_alert = (
+                reply_pop_up_alert=(
                     f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
                 )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
+        @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
                 await event.edit("**Help Mode Button Ditutup!**")
             else:
-                reply_pop_up_alert = (
+                reply_pop_up_alert=(
                     f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
                 )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @tgbot.on(
+        @ tgbot.on(
             events.callbackquery.CallbackQuery(
                 data=re.compile(rb"helpme_prev\((.+?)\)")
             )
         )
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
-                current_page_number = int(
+                current_page_number=int(
                     event.data_match.group(1).decode("UTF-8"))
-                buttons = paginate_help(
+                buttons=paginate_help(
                     current_page_number - 1, dugmeler, "helpme")
                 # https://t.me/TelethonChat/115200
                 await event.edit(buttons=buttons)
             else:
-                reply_pop_up_alert = (
+                reply_pop_up_alert=(
                     f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
                 )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ub_modul_(.*)")))
+        @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ub_modul_(.*)")))
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
-                modul_name = event.data_match.group(1).decode("UTF-8")
+                modul_name=event.data_match.group(1).decode("UTF-8")
 
-                cmdhel = str(CMD_HELP[modul_name])
+                cmdhel=str(CMD_HELP[modul_name])
                 if len(cmdhel) > 150:
-                    help_string = (
+                    help_string=(
                         str(CMD_HELP[modul_name]).replace("`", "")[:150]
                         + "..."
                         + "\n\nBaca Teks Berikutnya Ketik .help "
@@ -607,9 +609,9 @@ with bot:
                         + " "
                     )
                 else:
-                    help_string = str(CMD_HELP[modul_name]).replace("`", "")
+                    help_string=str(CMD_HELP[modul_name]).replace("`", "")
 
-                reply_pop_up_alert = (
+                reply_pop_up_alert=(
                     help_string
                     if help_string is not None
                     else "{} Tidak ada dokumen yang telah ditulis untuk modul.".format(
@@ -617,7 +619,7 @@ with bot:
                     )
                 )
             else:
-                reply_pop_up_alert = (
+                reply_pop_up_alert=(
                     f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
                 )
 
