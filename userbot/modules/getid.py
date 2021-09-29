@@ -1,16 +1,9 @@
-import logging
-
 from telethon.utils import pack_bot_file_id
 
 from userbot import CMD_HELP, LOGS
 from userbot.events import register
 from userbot.utils import edit_delete, edit_or_reply
-
-logging.basicConfig(
-    format="[%(levelname)s- %(asctime)s]- %(name)s- %(message)s",
-    level=logging.INFO,
-    datefmt="%H:%M:%S",
-)
+from userbot.utils.logger import logging
 
 LOGS = logging.getLogger(__name__)
 
