@@ -30,8 +30,6 @@ LOG_CHATS_ = LOG_CHATS()
 
 @bot.on(events.NewMessage(incoming=True, func=lambda e: e.is_private))
 async def monito_p_m_s(event):
-    if BOTLOG_CHATID == -100:
-        return
     if gvarstatus("PMLOG") and gvarstatus("PMLOG") == "false":
         return
     sender = await event.get_sender()
@@ -72,6 +70,8 @@ async def monito_p_m_s(event):
 
 @bot.on(events.NewMessage(incoming=True, func=lambda e: e.mentioned))
 async def log_tagged_messages(event):
+    if BOTLOG_CHATID == -100:
+        return
     hmm = await event.get_chat()
 
     if gvarstatus("GRUPLOG") and gvarstatus("GRUPLOG") == "false":
