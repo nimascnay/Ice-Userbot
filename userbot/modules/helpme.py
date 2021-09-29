@@ -1,23 +1,21 @@
-import os
 import re
 import sys
-import time
-
-from sys import version_info
-from logging import basicConfig, getLogger, INFO, DEBUG
-from distutils.util import strtobool as sb
 from math import ceil
 
-from pathlib import Path
-from pylast import LastFMNetwork, md5
-from pySmartDL import SmartDL
-from pymongo import MongoClient
-from redis import StrictRedis
-from dotenv import load_dotenv
-from requests import get
 from telethon.sync import TelegramClient, custom, events
-from telethon.sessions import StringSession
-from userbot import ALIVE_NAME, API_KEY, API_HASH, BOT_TOKEN, BOT_VER, BOTLOG, BOTLOG_CHATID, CMD_HELP, LOGS, UPSTREAM_REPO_BRANCH, bot
+
+from userbot import (
+    ALIVE_NAME,
+    API_HASH,
+    API_KEY,
+    BOT_TOKEN,
+    BOT_VER,
+    CMD_HELP,
+    LOGS,
+    UPSTREAM_REPO_BRANCH,
+    bot,
+)
+
 
 def paginate_help(page_number, loaded_modules, prefix):
     number_of_rows = 5
@@ -28,27 +26,29 @@ def paginate_help(page_number, loaded_modules, prefix):
         custom.Button.inline("{} {} ✘".format("✘", x), data="ub_modul_{}".format(x))
         for x in helpable_modules
     ]
-    pairs = list(zip(modules[::number_of_cols],
-                     modules[1::number_of_cols],
-                     modules[2::number_of_cols]))
+    pairs = list(
+        zip(
+            modules[::number_of_cols],
+            modules[1::number_of_cols],
+            modules[2::number_of_cols],
+        )
+    )
     if len(modules) % number_of_cols == 1:
         pairs.append((modules[-1],))
     max_num_pages = ceil(len(pairs) / number_of_rows)
     modulo_page = page_number % max_num_pages
     if len(pairs) > number_of_rows:
         pairs = pairs[
-            modulo_page * number_of_rows: number_of_rows * (modulo_page + 1)
+            modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
         ] + [
             (
                 custom.Button.inline(
                     "««", data="{}_prev({})".format(prefix, modulo_page)
                 ),
-                custom.Button.inline(
-                    'Tutup', b'close'
-                ),
+                custom.Button.inline("Tutup", b"close"),
                 custom.Button.inline(
                     "»»", data="{}_next({})".format(prefix, modulo_page)
-                )
+                ),
             )
         ]
     return pairs
@@ -56,11 +56,9 @@ def paginate_help(page_number, loaded_modules, prefix):
 
 with bot:
     try:
-        tgbot = TelegramClient(
-            "TG_BOT_TOKEN",
-            api_id=API_KEY,
-            api_hash=API_HASH).start(
-            bot_token=BOT_TOKEN)
+        tgbot = TelegramClient("TG_BOT_TOKEN", api_id=API_KEY, api_hash=API_HASH).start(
+            bot_token=BOT_TOKEN
+        )
 
         dugmeler = CMD_HELP
         me = bot.get_me()
@@ -76,17 +74,20 @@ with bot:
                 f"✣ **Userbot Version :** `{BOT_VER}@{UPSTREAM_REPO_BRANCH}`\n"
                 f"✣ **Group Support :** [Sharing Userbot](t.me/sharinguserbot)\n"
                 f"✣ **Owner Repo :** [Risman](t.me/mrismanaziz)\n"
-                f"✣ **Repo :** [Man-Userbot](https://github.com/mrismanaziz/Man-Userbot)\n")
-            await tgbot.send_file(event.chat_id, logo, caption=text,
-                                  buttons=[
-                                      [
-                                          custom.Button.url(
-                                              text="⛑ Group Support ⛑",
-                                              url="https://t.me/SharingUserbot"
-                                          )
-                                      ]
-                                  ]
-                                  )
+                f"✣ **Repo :** [Man-Userbot](https://github.com/mrismanaziz/Man-Userbot)\n"
+            )
+            await tgbot.send_file(
+                event.chat_id,
+                logo,
+                caption=text,
+                buttons=[
+                    [
+                        custom.Button.url(
+                            text="⛑ Group Support ⛑", url="https://t.me/SharingUserbot"
+                        )
+                    ]
+                ],
+            )
 
         @tgbot.on(events.InlineQuery)
         async def inline_handler(event):
@@ -112,14 +113,14 @@ with bot:
                     text="**Man - UserBot**\n➖➖➖➖➖➖➖➖➖➖\n✣ **Owner Repo :** [Risman](https://t.me/mrismanaziz)\n✣ **Grup Support :** @SharingUserbot\n✣ **Repository :** [Man-Userbot](https://github.com/mrismanaziz/Man-Userbot)\n➖➖➖➖➖➖➖➖➖➖",
                     buttons=[
                         [
+                            custom.Button.url("Support", "https://t.me/SharingUserbot"),
                             custom.Button.url(
-                                "Support",
-                                "https://t.me/SharingUserbot"),
-                            custom.Button.url(
-                                "Repo",
-                                "https://github.com/mrismanaziz/Man-Userbot")],
+                                "Repo", "https://github.com/mrismanaziz/Man-Userbot"
+                            ),
+                        ],
                     ],
-                    link_preview=False)
+                    link_preview=False,
+                )
             else:
                 result = builder.article(
                     title="✗ Man-Userbot ✗",
@@ -128,12 +129,11 @@ with bot:
                     text="**Man - UserBot**\n➖➖➖➖➖➖➖➖➖➖\n✣ **Owner Repo :** [Risman](https://t.me/mrismanaziz)\n✣ **Grup Support :** @SharingUserbot\n✣ **Repository :** [Man-Userbot](https://github.com/mrismanaziz/Man-Userbot)\n➖➖➖➖➖➖➖➖➖➖",
                     buttons=[
                         [
+                            custom.Button.url("Support", "https://t.me/SharingUserbot"),
                             custom.Button.url(
-                                "Support",
-                                "https://t.me/SharingUserbot"),
-                            custom.Button.url(
-                                "Repo",
-                                "https://github.com/mrismanaziz/Man-Userbot")],
+                                "Repo", "https://github.com/mrismanaziz/Man-Userbot"
+                            ),
+                        ],
                     ],
                     link_preview=False,
                 )
@@ -146,14 +146,14 @@ with bot:
         )
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
-                current_page_number = int(
-                    event.data_match.group(1).decode("UTF-8"))
-                buttons = paginate_help(
-                    current_page_number + 1, dugmeler, "helpme")
+                current_page_number = int(event.data_match.group(1).decode("UTF-8"))
+                buttons = paginate_help(current_page_number + 1, dugmeler, "helpme")
                 # https://t.me/TelethonChat/115200
                 await event.edit(buttons=buttons)
             else:
-                reply_pop_up_alert = f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                reply_pop_up_alert = (
+                    f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
@@ -161,7 +161,9 @@ with bot:
             if event.query.user_id == uid:
                 await event.edit("**Help Mode Button Ditutup!**")
             else:
-                reply_pop_up_alert = f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                reply_pop_up_alert = (
+                    f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
         @tgbot.on(
@@ -171,22 +173,17 @@ with bot:
         )
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
-                current_page_number = int(
-                    event.data_match.group(1).decode("UTF-8"))
-                buttons = paginate_help(
-                    current_page_number - 1, dugmeler, "helpme"
-                )
+                current_page_number = int(event.data_match.group(1).decode("UTF-8"))
+                buttons = paginate_help(current_page_number - 1, dugmeler, "helpme")
                 # https://t.me/TelethonChat/115200
                 await event.edit(buttons=buttons)
             else:
-                reply_pop_up_alert = f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                reply_pop_up_alert = (
+                    f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @tgbot.on(
-            events.callbackquery.CallbackQuery(
-                data=re.compile(b"ub_modul_(.*)")
-            )
-        )
+        @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ub_modul_(.*)")))
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
                 modul_name = event.data_match.group(1).decode("UTF-8")
@@ -194,13 +191,14 @@ with bot:
                 cmdhel = str(CMD_HELP[modul_name])
                 if len(cmdhel) > 150:
                     help_string = (
-                        str(CMD_HELP[modul_name]).replace('`', '')[:150] + "..."
+                        str(CMD_HELP[modul_name]).replace("`", "")[:150]
+                        + "..."
                         + "\n\nBaca Teks Berikutnya Ketik .help "
                         + modul_name
                         + " "
                     )
                 else:
-                    help_string = str(CMD_HELP[modul_name]).replace('`', '')
+                    help_string = str(CMD_HELP[modul_name]).replace("`", "")
 
                 reply_pop_up_alert = (
                     help_string
@@ -210,7 +208,9 @@ with bot:
                     )
                 )
             else:
-                reply_pop_up_alert = f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                reply_pop_up_alert = (
+                    f"Kamu Tidak diizinkan, ini Userbot Milik {ALIVE_NAME}"
+                )
 
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
@@ -218,12 +218,14 @@ with bot:
         LOGS.info(
             "Help Mode Inline Bot Mu Tidak aktif. Tidak di aktifkan juga tidak apa-apa. "
             "Untuk Mengaktifkannya Buat bot di @BotFather Lalu Tambahkan var BOT_TOKEN dan BOT_USERNAME. "
-            "Pergi Ke @BotFather lalu settings bot » Pilih mode inline » Turn On. ")
+            "Pergi Ke @BotFather lalu settings bot » Pilih mode inline » Turn On. "
+        )
     try:
         bot.loop.run_until_complete(check_botlog_chatid())
     except BaseException:
         LOGS.info(
             "var BOTLOG_CHATID kamu belum di isi. "
             "Buatlah grup telegram dan masukan bot @MissRose_bot lalu ketik /id "
-            "Masukan id grup nya di var BOTLOG_CHATID")
+            "Masukan id grup nya di var BOTLOG_CHATID"
+        )
         sys.exit(1)
