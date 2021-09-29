@@ -103,24 +103,27 @@ with bot:
                 f"✣ **Owner Repo :** [Risman](t.me/mrismanaziz)\n"
                 f"✣ **Repo :** [Man-Userbot](https://github.com/mrismanaziz/Man-Userbot)\n"
             )
-            await tgbot.send_file(event.chat_id, 
-            logo,
-            caption=text,
-            buttons=[
-            [
-            custom.Button.url(
-            text="⛑ REPO MAN-USERBOT ⛑",
-            url="https://github.com/mrismanaziz/Man-Userbot")],
-            [custom.Button.url(
-            text="GROUP",
-            url="https://t.me/SharingUserbot"),
-            custom.Button.url(
-            text="CHANNEL",
-            url="https://t.me/Lunatic0de"
+            await tgbot.send_file(
+                event.chat_id,
+                logo,
+                caption=text,
+                buttons=[
+                    [
+                        custom.Button.url(
+                            text="⛑ REPO MAN-USERBOT ⛑",
+                            url="https://github.com/mrismanaziz/Man-Userbot",
+                        )
+                    ],
+                    [
+                        custom.Button.url(
+                            text="GROUP", url="https://t.me/SharingUserbot"
+                        ),
+                        custom.Button.url(
+                            text="CHANNEL", url="https://t.me/Lunatic0de"
+                        ),
+                    ],
+                ],
             )
-                                               ]
-                                           ]
-                                           )
 
         @tgbot.on(events.NewMessage(pattern=r"/string"))
         async def handler(event):
