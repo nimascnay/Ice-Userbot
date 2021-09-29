@@ -57,7 +57,8 @@ async def pingme(pong):
         f"**PONG!!🏓**\n"
         f"✣ **Pinger** - `%sms`\n"
         f"✣ **Uptime -** `{uptime}` \n"
-        f"**✦҈͜͡Owner :** {_format.htmlmentionuser(userdata.first_name,userdata.id)}" % (duration)
+        f"**✦҈͜͡Owner :** {_format.htmlmentionuser(userdata.first_name,userdata.id)}"
+        % (duration)
     )
 
 
@@ -98,15 +99,11 @@ async def pingme(pong):
 @register(incoming=True, from_users=DEVS, pattern=r"^\.sping$")
 async def pingme(pong):
     """For .ping command, ping the userbot from any chat."""
-    uptime = await get_readable_time((time.time() - StartTime))
+    await get_readable_time((time.time() - StartTime))
     start = datetime.now()
     end = datetime.now()
     duration = (end - start).microseconds / 1000
-    await pong.reply(
-        "🏓 **Pong!!**\n"
-        f"`%sms`"  % (duration)
-    )
-
+    await pong.reply("🏓 **Pong!!**\n" f"`%sms`" % (duration))
 
 
 @register(outgoing=True, pattern=r"^\.fping$")
