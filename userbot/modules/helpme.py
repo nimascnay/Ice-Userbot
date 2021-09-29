@@ -10,11 +10,36 @@ from userbot import (
     API_KEY,
     BOT_TOKEN,
     BOT_VER,
+    BOTLOG_CHATID,
     CMD_HELP,
     LOGS,
+    LOGSPAMMER,
     UPSTREAM_REPO_BRANCH,
     bot,
 )
+
+async def check_botlog_chatid():
+    if not BOTLOG_CHATID and LOGSPAMMER:
+        LOGS.info(
+            "Anda harus menambahkan var BOTLOG_CHATID di config.env atau di var heroku, agar penyimpanan log error userbot pribadi berfungsi."
+        )
+        sys.exit(1)
+
+    elif not BOTLOG_CHATID and BOTLOG:
+        LOGS.info(
+            "Anda harus menambahkan var BOTLOG_CHATID di config.env atau di var heroku, agar fitur logging userbot berfungsi."
+        )
+        sys.exit(1)
+
+    elif not BOTLOG or not LOGSPAMMER:
+        return
+
+    entity = await bot.get_entity(BOTLOG_CHATID)
+    if entity.default_banned_rights.send_messages:
+        LOGS.info(
+            "Akun Anda tidak bisa mengirim pesan ke BOTLOG_CHATID "
+            "Periksa apakah Anda memasukan ID grup dengan benar.")
+        sys.exit(1)
 
 
 def paginate_help(page_number, loaded_modules, prefix):
