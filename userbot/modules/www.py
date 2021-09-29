@@ -13,7 +13,11 @@ from speedtest import Speedtest
 
 from userbot import ALIVE_NAME, CMD_HELP, DEVS, StartTime
 from userbot.events import register
-from userbot.utils import _format, humanbytes
+from userbot.utils import humanbytes
+
+
+def mentionuser(name, userid):
+    return f"[{name}](tg://user?id={userid})"
 
 
 async def get_readable_time(seconds: int) -> str:
@@ -57,8 +61,7 @@ async def pingme(pong):
         f"**PONG!!🏓**\n"
         f"✣ **Pinger** - `%sms`\n"
         f"✣ **Uptime -** `{uptime}` \n"
-        f"**✦҈͜͡Owner :** {_format.htmlmentionuser(userdata.first_name,userdata.id)}"
-        % (duration)
+        f"**✦҈͜͡Owner :** {mentionuser}" % (duration)
     )
 
 
