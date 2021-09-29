@@ -116,6 +116,47 @@ with bot:
                 ],
             )
 
+
+        @tgbot.on(events.NewMessage(pattern=r"/string"))
+        async def handler(event):
+            if event.message.from_id != uid:
+                await event.reply(
+                    f"**KLIK DI BAWAH INI UNTUK MENGAMBIL STRING**\n\n",
+                    buttons=[
+                        [
+                            Button.url("⛑ STRING SESSION ⛑",
+                                       "https://repl.it/@mrismanaziz/stringenSession?lite=1&outputonly=1")],
+                    ]
+                )
+
+
+        @tgbot.on(events.NewMessage(pattern=r"/repo"))
+        async def handler(event):
+            if event.message.from_id != uid:
+                await event.reply(
+                    "⛑ **REPO MAN-USERBOT** ⛑\n\n",
+                    buttons=[
+                        [
+                            Button.url("Repo",
+                                       "https://github.com/mrismanaziz/Man-Userbot"),
+                            Button.url("Support",
+                                       "https://t.me/SharingUserbot")],
+                    ]
+                )
+
+
+        @tgbot.on(events.NewMessage(pattern=r"/ping"))
+        async def handler(event):
+            if event.message.from_id != uid:
+                start = datetime.now()
+                end = datetime.now()
+                ms = (end - start).microseconds / 1000
+                await tgbot.send_message(
+                    event.chat_id,
+                    f"🏓 **Pong!!**\n`{ms}ms`",
+                )
+
+
         @tgbot.on(events.InlineQuery)
         async def inline_handler(event):
             builder = event.builder
