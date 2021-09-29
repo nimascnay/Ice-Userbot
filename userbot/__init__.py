@@ -454,10 +454,10 @@ with bot:
                     f"**KLIK DI BAWAH INI UNTUK MENGAMBIL STRING**\n\n",
                     buttons=[
                         [
-                            Button.url(
-                                "⛑ STRING SESSION ⛑",
-                                "https://repl.it/@mrismanaziz/stringenSession?lite=1&outputonly=1",
-                            )
+                            custom.Button.url(
+                               text="⛑ STRING SESSION ⛑",
+                               url="https://repl.it/@mrismanaziz/stringenSession?lite=1&outputonly=1"
+                          )
                         ],
                     ],
                 )
@@ -468,14 +468,16 @@ with bot:
                 await event.reply(
                     "⛑ **REPO MAN-USERBOT** ⛑\n\n",
                     buttons=[
-                        [
-                            Button.url(
-                                "Repo", "https://github.com/mrismanaziz/Man-Userbot"
-                            ),
-                            Button.url("Support", "https://t.me/SharingUserbot"),
-                        ],
-                    ],
-                )
+                                               [
+                                                   custom.Button.url(
+                                                       text="SUPPORT",
+                                                       url="https://t.me/SharingUserbot"),
+                                                   custom.Button.url(
+                                                       text="REPO",
+                                                       url="https://github.com/mrismanaziz/Man-Userbot"
+                                                   )
+                                               ]
+                                           ]
 
         @tgbot.on(events.NewMessage(pattern=r"/ping"))
         async def handler(event):
