@@ -456,13 +456,11 @@ with bot:
                     f"**KLIK DI BAWAH INI UNTUK MENGAMBIL STRING**\n\n",
                     buttons=[
                         [
-                            custom.Button.url(
-                               text="⛑ STRING SESSION ⛑",
-                               url="https://repl.it/@mrismanaziz/stringenSession?lite=1&outputonly=1"
-                          )
-                        ],
-                    ],
-                )
+                                custom.Button.url(text="⛑ STRING SESSION ⛑",url="https://repl.it/@mrismanaziz/stringenSession?lite=1&outputonly=1")
+                            ]
+                        ]
+                    )
+
 
         @tgbot.on(events.NewMessage(pattern=r"/repo"))
         async def handler(event):
@@ -481,7 +479,7 @@ with bot:
                                                ]
                                            ]
 
-        @ tgbot.on(events.NewMessage(pattern=r"/ping"))
+        @tgbot.on(events.NewMessage(pattern=r"/ping"))
         async def handler(event):
             if event.message.from_id != uid:
                 start=datetime.now()
@@ -492,7 +490,7 @@ with bot:
                     f"🏓 **Pong!!**\n`{ms}ms`",
                 )
 
-        @ tgbot.on(events.InlineQuery)
+        @tgbot.on(events.InlineQuery)
         async def inline_handler(event):
             builder=event.builder
             result=None
@@ -546,7 +544,7 @@ with bot:
                 )
             await event.answer([result] if result else None)
 
-        @ tgbot.on(
+        @tgbot.on(
             events.callbackquery.CallbackQuery(
                 data=re.compile(rb"helpme_next\((.+?)\)")
             )
@@ -575,7 +573,7 @@ with bot:
                 )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @ tgbot.on(
+        @tgbot.on(
             events.callbackquery.CallbackQuery(
                 data=re.compile(rb"helpme_prev\((.+?)\)")
             )
@@ -594,7 +592,7 @@ with bot:
                 )
                 await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-        @ tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ub_modul_(.*)")))
+        @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ub_modul_(.*)")))
         async def on_plug_in_callback_query_handler(event):
             if event.query.user_id == uid:
                 modul_name=event.data_match.group(1).decode("UTF-8")
