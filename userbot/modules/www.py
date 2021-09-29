@@ -48,7 +48,7 @@ async def get_readable_time(seconds: int) -> str:
 @register(outgoing=True, pattern=r"^\.ping$")
 async def pingme(pong):
     """For .ping command, ping the userbot from any chat."""
-    userdata = await event.client.get_entity(userentity)
+    await event.client.get_entity(userentity)
     uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()
     await pong.edit("**✣**")
