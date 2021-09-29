@@ -11,9 +11,9 @@ from datetime import datetime
 
 from speedtest import Speedtest
 
-from userbot import ALIVE_NAME, CMD_HELP, StartTime
+from userbot import ALIVE_NAME, CMD_HELP, DEVS, StartTime
 from userbot.events import register
-from userbot.utils import humanbytes
+from userbot.utils import _format, humanbytes
 
 
 async def get_readable_time(seconds: int) -> str:
@@ -56,7 +56,7 @@ async def pingme(pong):
         f"**PONG!!🏓**\n"
         f"✣ **Pinger** - `%sms`\n"
         f"✣ **Uptime -** `{uptime}` \n"
-        f"**✦҈͜͡Owner :** `{ALIVE_NAME}`" % (duration)
+        f"**✦҈͜͡Owner :** {_format.htmlmentionuser(userdata.first_name,userdata.id)}" % (duration)
     )
 
 
@@ -92,6 +92,20 @@ async def pingme(pong):
         f"`{uptime}` \n"
         f"**✦҈͜͡➳ Master :** `{ALIVE_NAME}`" % (duration)
     )
+
+
+@register(incoming=True, from_users=DEVS, pattern=r"^\.sping$")
+async def pingme(pong):
+    """For .ping command, ping the userbot from any chat."""
+    uptime = await get_readable_time((time.time() - StartTime))
+    start = datetime.now()
+    end = datetime.now()
+    duration = (end - start).microseconds / 1000
+    await pong.reply(
+        "🏓 **Pong!!**\n"
+        f"`%sms`"  % (duration)
+    )
+
 
 
 @register(outgoing=True, pattern=r"^\.fping$")
