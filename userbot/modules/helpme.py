@@ -18,6 +18,7 @@ from userbot import (
     bot,
 )
 
+
 async def check_botlog_chatid():
     if not BOTLOG_CHATID and LOGSPAMMER:
         LOGS.info(
@@ -38,7 +39,8 @@ async def check_botlog_chatid():
     if entity.default_banned_rights.send_messages:
         LOGS.info(
             "Akun Anda tidak bisa mengirim pesan ke BOTLOG_CHATID "
-            "Periksa apakah Anda memasukan ID grup dengan benar.")
+            "Periksa apakah Anda memasukan ID grup dengan benar."
+        )
         sys.exit(1)
 
 
