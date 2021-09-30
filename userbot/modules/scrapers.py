@@ -15,6 +15,7 @@ import asyncio
 import io
 import json
 import os
+import re
 import shutil
 import time
 from asyncio import sleep
@@ -34,7 +35,8 @@ from googletrans import LANGUAGES, Translator
 from gtts import gTTS
 from gtts.lang import tts_langs
 from requests import get
-from search_engine_parser import YahooSearch as GoogleSearch
+from search_engine_parser import BingSearch, GoogleSearch, YahooSearch
+from search_engine_parser.core.exceptions import NoResultsOrTrafficError
 from telethon.tl.types import DocumentAttributeAudio, MessageMediaPhoto
 from wikipedia import summary
 from wikipedia.exceptions import DisambiguationError, PageError
@@ -62,7 +64,7 @@ from userbot import (
     bot,
 )
 from userbot.events import register
-from userbot.utils import chrome, googleimagesdownload, options, progress
+from userbot.utils import edit_delete, edit_or_reply, chrome, googleimagesdownload, options, progress
 
 CARBONLANG = "auto"
 TTS_LANG = "id"
@@ -73,18 +75,6 @@ TEMP_DOWNLOAD_DIRECTORY = "/root/userbot/.bin"
 async def ocr_space_file(
     filename, overlay=False, api_key=OCR_SPACE_API_KEY, language="eng"
 ):
-    """OCR.space API request with local file.
-        Python3.5 - not tested on 2.7
-    :param filename: Your file path & name.
-    :param overlay: Is OCR.space overlay required in your response.
-                    Defaults to False.
-    :param api_key: OCR.space API key.
-                    Defaults to 'helloworld'.
-    :param language: Language code to be used in OCR.
-                    List of available language codes can be found on https://ocr.space/OCRAPI
-                    Defaults to 'eng'.
-    :return: Result in JSON format.
-    """
 
     payload = {
         "isOverlayRequired": overlay,
@@ -225,49 +215,59 @@ async def moni(event):
     await event.edit(f"**{c_from_val} {c_from} = {c_to_val} {c_to}**")
 
 
-@register(outgoing=True, pattern=r"^\.google(?: |$)(\d*)? ?(.*)")
-async def gsearch(event):
-    """For .google command, do a Google search."""
-    if event.is_reply and not event.pattern_match.group(2):
-        match = await event.get_reply_message()
-        match = str(match.message)
-    else:
-        match = str(event.pattern_match.group(2))
-
-    if not match:
-        return await event.edit("**Reply pesan atau Berikan Keyword untuk dicari!**")
-
-    await event.edit("`Processing...`")
-
-    if event.pattern_match.group(1) != "":
-        counter = int(event.pattern_match.group(1))
-        if counter > 10:
-            counter = int(10)
-        if counter <= 0:
-            counter = int(1)
-    else:
-        counter = int(5)
-
-    search_args = (str(match), int(1))
+@register(outgoing=True, pattern=r"^\.google ([\s\S]*)")
+async def gsearch(q_event):
+    man = await edit_or_reply(q_event, "`Processing...`")
+    match = q_event.pattern_match.group(1)
+    page = re.findall(r"-p\d+", match)
+    lim = re.findall(r"-l\d+", match)
+    try:
+        page = page[0]
+        page = page.replace("-p", "")
+        match = match.replace("-p" + page, "")
+    except IndexError:
+        page = 1
+    try:
+        lim = lim[0]
+        lim = lim.replace("-l", "")
+        match = match.replace("-l" + lim, "")
+        lim = int(lim)
+        if lim <= 0:
+            lim = int(5)
+    except IndexError:
+        lim = 5
+    smatch = match.replace(" ", "+")
+    search_args = (str(smatch), int(page))
     gsearch = GoogleSearch()
-
+    bsearch = BingSearch()
+    ysearch = YahooSearch()
     try:
         gresults = await gsearch.async_search(*search_args)
-    except BaseException as g_e:
-        return await event.edit(f"**ERROR:** `{g_e}`")
+    except NoResultsOrTrafficError:
+        try:
+            gresults = await bsearch.async_search(*search_args)
+        except NoResultsOrTrafficError:
+            try:
+                gresults = await ysearch.async_search(*search_args)
+            except Exception as e:
+                return await edit_delete(man, f"**ERROR:**\n`{e}`", time=10)
     msg = ""
-
-    for i in range(counter):
+    for i in range(lim):
+        if i > len(gresults["links"]):
+            break
         try:
             title = gresults["titles"][i]
             link = gresults["links"][i]
             desc = gresults["descriptions"][i]
-            msg += f"[{title}]({link})\n`{desc}`\n\n"
+            msg += f"👉 [{title}]({link})\n`{desc}`\n\n"
         except IndexError:
             break
-
-    await event.edit(
-        "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
+    await edit_or_reply(
+        man,
+        "**Keyword Google Search:**\n `" + match + "`\n\n**Results:**\n" + msg,
+        link_preview=False,
+        aslink=True,
+        linktext=f"**Hasil Pencarian untuk Keyword** `{match}` **adalah** :",
     )
 
 
