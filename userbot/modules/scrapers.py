@@ -15,12 +15,9 @@ import asyncio
 import io
 import json
 import os
-import re
 import shutil
 import time
 from asyncio import sleep
-from os import popen
-from random import choice
 from re import findall, match
 from time import sleep
 from urllib.parse import quote_plus
@@ -36,7 +33,6 @@ from emoji import get_emoji_regexp
 from googletrans import LANGUAGES, Translator
 from gtts import gTTS
 from gtts.lang import tts_langs
-from humanize import naturalsize
 from requests import get
 from search_engine_parser import YahooSearch as GoogleSearch
 from telethon.tl.types import DocumentAttributeAudio, MessageMediaPhoto
