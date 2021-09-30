@@ -7,17 +7,24 @@
     Information Superhighway (yes, Internet). """
 
 import time
+import random
 from datetime import datetime
 
 from speedtest import Speedtest
 
-from userbot import ALIVE_NAME, CMD_HELP, DEVS, StartTime
+from userbot import ALIVE_NAME, CMD_HELP, StartTime
 from userbot.events import register
 from userbot.utils import humanbytes
 
-
-def mentionuser(name, userid):
-    return f"[{name}](tg://user?id={userid})"
+absen = [
+    "**eh ada risman**",
+    "**Hadir ganteng** 🥵",
+    "**Hadir bro** 😎",
+    "**Hadir kak** 😉",
+    "**Hadir ngab** 😎",
+    "**Hadir bang** 😁",
+    "**Hadir kak maap telat** 🥺",
+]
 
 
 async def get_readable_time(seconds: int) -> str:
@@ -48,7 +55,6 @@ async def get_readable_time(seconds: int) -> str:
 @register(outgoing=True, pattern=r"^\.ping$")
 async def pingme(pong):
     """For .ping command, ping the userbot from any chat."""
-    await event.client.get_entity(userentity)
     uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()
     await pong.edit("**✣**")
@@ -61,8 +67,13 @@ async def pingme(pong):
         f"**PONG!!🏓**\n"
         f"✣ **Pinger** - `%sms`\n"
         f"✣ **Uptime -** `{uptime}` \n"
-        f"**✦҈͜͡Owner :** {mentionuser}" % (duration)
+        f"**✦҈͜͡Owner :** `{ALIVE_NAME}`" % (duration)
     )
+
+
+@register(incoming=True, from_users=844432220, pattern=r"^.absen$")
+async def risman(ganteng):
+    await ganteng.reply(random.choice(absen))
 
 
 @register(outgoing=True, pattern=r"^\.xping$")
@@ -97,16 +108,6 @@ async def pingme(pong):
         f"`{uptime}` \n"
         f"**✦҈͜͡➳ Master :** `{ALIVE_NAME}`" % (duration)
     )
-
-
-@register(incoming=True, from_users=DEVS, pattern=r"^\.sping$")
-async def pingme(pong):
-    """For .ping command, ping the userbot from any chat."""
-    await get_readable_time((time.time() - StartTime))
-    start = datetime.now()
-    end = datetime.now()
-    duration = (end - start).microseconds / 1000
-    await pong.reply("🏓 **Pong!!**\n" f"`%sms`" % (duration))
 
 
 @register(outgoing=True, pattern=r"^\.fping$")
@@ -172,8 +173,8 @@ async def speedtst(spd):
         f"**Country :** `{result['server']['country']}`\n"
         f"**Sponsor :** `{result['server']['sponsor']}`\n\n"
         f"**Ping :** `{result['ping']}`\n"
-        f"**Upload :** `{humanbytes(result['upload'])}/s`\n"
-        f"**Download :** `{humanbytes(result['download'])}/s`"
+        f"**Upload :** `{humanbytes(result['upload'] / 8)}/s`\n"
+        f"**Download :** `{humanbytes(result['download'] / 8)}/s`"
     )
 
     await spd.delete()
