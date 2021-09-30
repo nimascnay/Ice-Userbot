@@ -82,6 +82,9 @@ BLACKLIST_CHAT = os.environ.get("BLACKLIST_CHAT", None)
 if not BLACKLIST_CHAT:
     BLACKLIST_CHAT = [-1001473548283]
 
+# Custom Handler command
+CUSTOM_CMD = os.environ.get("CUSTOM_CMD") or "."
+
 # Telegram App KEY and HASH
 API_KEY = int(os.environ.get("API_KEY") or 0)
 API_HASH = str(os.environ.get("API_HASH") or None)
