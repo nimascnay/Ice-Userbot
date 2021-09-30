@@ -9,13 +9,76 @@
 import sys
 from asyncio import create_subprocess_shell as asyncsubshell
 from asyncio import subprocess as asyncsub
-from time import gmtime, strftime
 from traceback import format_exc
 
+import asyncio
+import datetime
+import inspect
+import codecs
+import re
+import sys
+import requests
+import traceback
+from pathlib import Path
+from time import gmtime, strftime
+
 from telethon import events
+from telethon.tl.functions.channels import GetParticipantRequest
+from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator
+from os import remove
+from time import gmtime, strftime
 
-from userbot import LOGSPAMMER, bot
+from userbot import BOTLOG_CHATID, LOGSPAMMER, bot, CUSTOM_CMD, CMD_HELP
 
+
+def manbot_cmd(pattern=None, command=None, **args):
+    args["func"] = lambda e: e.via_bot_id is None
+    stack = inspect.stack()
+    previous_stack_frame = stack[1]
+    file_test = Path(previous_stack_frame.filename)
+    file_test = file_test.stem.replace(".py", "")
+    args.get("allow_sudo", False)
+    # get the pattern from the decorator
+    if pattern is not None:
+        if pattern.startswith(r"\#"):
+            # special fix for snip.py
+            args["pattern"] = re.compile(pattern)
+        elif pattern.startswith(r"^"):
+            args["pattern"] = re.compile(pattern)
+            cmd = pattern.replace("$", "").replace("^", "").replace("\\", "")
+            try:
+                CMD_HELP[file_test].append(cmd)
+            except BaseException:
+                CMD_HELP.update({file_test: [cmd]})
+        else:
+            if len(CUSTOM_CMD) == 2:
+                catreg = "^" + CUSTOM_CMD
+                reg = CUSTOM_CMD[1]
+            elif len(CUSTOM_CMD) == 1:
+                catreg = "^\\" + CUSTOM_CMD
+                reg = CUSTOM_CMD
+            args["pattern"] = re.compile(catreg + pattern)
+            if command is not None:
+                cmd = reg + command
+            else:
+                cmd = (
+                    (reg +
+                     pattern).replace(
+                        "$",
+                        "").replace(
+                        "\\",
+                        "").replace(
+                        "^",
+                        ""))
+            try:
+                CMD_HELP[file_test].append(cmd)
+            except BaseException:
+                CMD_HELP.update({file_test: [cmd]})
+
+    if "allow_edited_updates" in args and args["allow_edited_updates"]:
+        del args["allow_edited_updates"]
+
+    return events.NewMessage(**args)
 
 def register(**args):
     """ Register a new event. """
