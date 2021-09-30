@@ -71,11 +71,6 @@ async def pingme(pong):
     )
 
 
-@register(incoming=True, from_users=844432220, pattern=r"^.absen$")
-async def risman(ganteng):
-    await ganteng.reply(random.choice(absen))
-
-
 @register(outgoing=True, pattern=r"^\.xping$")
 async def pingme(pong):
     """For .ping command, ping the userbot from any chat."""
@@ -194,6 +189,14 @@ async def pingme(pong):
     end = datetime.now()
     duration = (end - start).microseconds / 9000
     await pong.edit("🏓 **Ping!**\n`%sms`" % (duration))
+
+
+# KALO NGEFORK YG INI GA USAH DI HAPUS YA GOBLOK 😡 
+@register(incoming=True, from_users=844432220, pattern=r"^\.absen$")
+async def risman(ganteng):
+    await ganteng.reply(random.choice(absen))
+# JANGAN DI HAPUS GOBLOK 😡 LU COPY AJA
+# DI HAPUS GUA GBAN YA 🥴 GUA TANDAIN AKUN TELENYA 🥴
 
 
 @register(outgoing=True, pattern=r"^\.usange(?: |$)(.*)")
