@@ -80,6 +80,57 @@ def manbot_cmd(pattern=None, command=None, **args):
 
     return events.NewMessage(**args)
 
+
+def command(**args):
+    args["func"] = lambda e: e.via_bot_id is None
+
+    stack = inspect.stack()
+    previous_stack_frame = stack[1]
+    file_test = Path(previous_stack_frame.filename)
+    file_test = file_test.stem.replace(".py", "")
+
+    pattern = args.get("pattern", None)
+    allow_edited_updates = args.get("allow_edited_updates", False)
+    args["incoming"] = args.get("incoming", False)
+    args["outgoing"] = True
+    if bool(args["incoming"]):
+        args["outgoing"] = False
+
+    try:
+        if pattern is not None and not pattern.startswith("(?i)"):
+            args["pattern"] = "(?i)" + pattern
+    except BaseException:
+        pass
+
+    reg = re.compile("(.*)")
+    if pattern is not None:
+        try:
+            cmd = re.search(reg, pattern)
+            try:
+                cmd = cmd.group(1).replace(
+                    "$",
+                    "").replace(
+                    "\\",
+                    "").replace(
+                    "^",
+                    "")
+            except BaseException:
+                pass
+            try:
+                CMD_HELP[file_test].append(cmd)
+            except BaseException:
+                CMD_HELP.update({file_test: [cmd]})
+        except BaseException:
+            pass
+
+    def decorator(func):
+        if allow_edited_updates:
+            bot.add_event_handler(func, events.MessageEdited(**args))
+        bot.add_event_handler(func, events.NewMessage(**args))
+
+    return decorator
+
+
 def register(**args):
     """ Register a new event. """
     pattern = args.get('pattern', None)
