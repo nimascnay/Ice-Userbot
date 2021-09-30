@@ -1,12 +1,9 @@
-import requests
-import re
 import os
-import asyncio
 from asyncio import sleep
+
 from telethon import events
-from telethon.tl import functions
-from telethon.tl.types import ChannelParticipantsKicked
 from telethon.tl.functions.messages import ExportChatInviteRequest
+from telethon.tl.types import ChannelParticipantsKicked
 
 from userbot import ALIVE_NAME, bot
 from userbot.events import register
@@ -32,36 +29,38 @@ async def _(event):
 async def sendbot(event):
     if event.fwd_from:
         return
-    chat = str(event.pattern_match.group(1).split(' ', 1)[0])
-    link = str(event.pattern_match.group(1).split(' ', 1)[1])
+    chat = str(event.pattern_match.group(1).split(" ", 1)[0])
+    link = str(event.pattern_match.group(1).split(" ", 1)[1])
     if not link:
         return await event.edit("**Maaf BOT Tidak Merespond.**")
-     
+
     botid = await event.client.get_entity(chat)
     await event.edit("`Processing...`")
     async with bot.conversation(chat) as conv:
-          try:     
-              response = conv.wait_event(events.NewMessage(incoming=True,from_users=botid))
-              msg = await bot.send_message(chat, link)
-              response = await response
-              await bot.send_read_acknowledge(conv.chat_id)
-          except YouBlockedUserError: 
-              await event.reply(f"**Unblock Terlebih dahulu {chat} dan coba lagi.**")
-              return
-          except :
-              await event.edit("**Tidak dapat menemukan bot itu 🥺**")
-              await sleep(2)
-              return await event.delete()
-         
-          await event.edit(f"**Pesan Terkirim:** `{link}`\n**Kepada: {chat}**")
-          await bot.send_message(event.chat_id, response.message)
-          await bot.send_read_acknowledge(event.chat_id)
-          await event.client.delete_messages(conv.chat_id,[msg.id, response.id])
+        try:
+            response = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=botid)
+            )
+            msg = await bot.send_message(chat, link)
+            response = await response
+            await bot.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            await event.reply(f"**Unblock Terlebih dahulu {chat} dan coba lagi.**")
+            return
+        except BaseException:
+            await event.edit("**Tidak dapat menemukan bot itu 🥺**")
+            await sleep(2)
+            return await event.delete()
+
+        await event.edit(f"**Pesan Terkirim:** `{link}`\n**Kepada: {chat}**")
+        await bot.send_message(event.chat_id, response.message)
+        await bot.send_read_acknowledge(event.chat_id)
+        await event.client.delete_messages(conv.chat_id, [msg.id, response.id])
 
 
 @register(outgoing=True, groups_only=True, pattern=r"^\.unbanall$")
 async def _(event):
-    xx = await event.edit("`Searching Participant Lists...`")
+    await event.edit("`Searching Participant Lists...`")
     p = 0
     title = (await event.get_chat()).title
     async for i in event.client.iter_participants(
@@ -120,7 +119,7 @@ async def _(event):
     await event.edit("`Processing...`")
     try:
         e = await event.client(
-        ExportChatInviteRequest(event.chat_id),
+            ExportChatInviteRequest(event.chat_id),
         )
     except ChatAdminRequiredError:
         return await bot.send_message(f"**Maaf {ALIVE_NAME} Bukan Admin 👮**")
@@ -134,12 +133,16 @@ async def _(event):
     k = await event.get_reply_message()
     if k:
         a = await bot.get_messages(event.chat_id, 0, from_user=k.sender_id)
-        return await event.edit(f"**Total ada** `{a.total}` **Chat Yang dikirim Oleh** {u} **di Grup Chat ini**")
+        return await event.edit(
+            f"**Total ada** `{a.total}` **Chat Yang dikirim Oleh** {u} **di Grup Chat ini**"
+        )
     u = event.pattern_match.group(1)
     if not u:
         u = "me"
     a = await bot.get_messages(event.chat_id, 0, from_user=u)
-    await event.edit(f"**Total ada `{a.total}` Chat Yang dikirim Oleh saya di Grup Chat ini**")
+    await event.edit(
+        f"**Total ada `{a.total}` Chat Yang dikirim Oleh saya di Grup Chat ini**"
+    )
 
 
 CMD_HELP.update(
@@ -182,7 +185,6 @@ CMD_HELP.update(
     "
     }
 )
-
 
 
 CMD_HELP.update(
