@@ -21,7 +21,6 @@ fontTools
 geopy
 git+https://github.com/ahupp/python-magic
 git+https://github.com/johnwmillr/LyricsGenius.git
-git+https://github.com/Ncode2014/search-engine-parser
 gitpython
 glitch_this
 google_images_download
@@ -78,6 +77,7 @@ redis>=3.3.10
 REPO_LINK
 requests
 scipy
+search-engine-parser
 selenium>=3.141.0 
 setuptools>=28.8.0
 speedtest-cli
