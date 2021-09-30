@@ -11,24 +11,16 @@ from asyncio import create_subprocess_shell as asyncsubshell
 from asyncio import subprocess as asyncsub
 from traceback import format_exc
 
-import asyncio
-import datetime
 import inspect
-import codecs
 import re
 import sys
-import requests
-import traceback
 from pathlib import Path
 from time import gmtime, strftime
 
 from telethon import events
-from telethon.tl.functions.channels import GetParticipantRequest
-from telethon.tl.types import ChannelParticipantAdmin, ChannelParticipantCreator
-from os import remove
 from time import gmtime, strftime
 
-from userbot import BOTLOG_CHATID, LOGSPAMMER, bot, CUSTOM_CMD, CMD_HELP
+from userbot import CMD_HELP, CUSTOM_CMD, LOGSPAMMER, bot
 
 
 def manbot_cmd(pattern=None, command=None, **args):
