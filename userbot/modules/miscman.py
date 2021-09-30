@@ -1,3 +1,11 @@
+# Copyright (c) 2021 Man-Userbot
+# Created by mrismanaziz
+# FROM <https://github.com/mrismanaziz/Man-Userbot>
+# t.me/SharingUserbot & t.me/Lunatic0de
+#
+# Thanks To Ultroid <https://github.com/TeamUltroid/Ultroid>
+# Thanks To Geez-UserBot <https://github.com/vckyou/Geez-UserBot>
+
 import os
 from asyncio import sleep
 
