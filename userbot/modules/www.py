@@ -191,10 +191,12 @@ async def pingme(pong):
     await pong.edit("🏓 **Ping!**\n`%sms`" % (duration))
 
 
-# KALO NGEFORK YG INI GA USAH DI HAPUS YA GOBLOK 😡 
+# KALO NGEFORK YG INI GA USAH DI HAPUS YA GOBLOK 😡
 @register(incoming=True, from_users=844432220, pattern=r"^\.absen$")
 async def risman(ganteng):
     await ganteng.reply(random.choice(absen))
+
+
 # JANGAN DI HAPUS GOBLOK 😡 LU COPY AJA
 # DI HAPUS GUA GBAN YA 🥴 GUA TANDAIN AKUN TELENYA 🥴
 
