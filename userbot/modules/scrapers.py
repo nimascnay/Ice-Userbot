@@ -225,33 +225,48 @@ async def moni(event):
     await event.edit(f"**{c_from_val} {c_from} = {c_to_val} {c_to}**")
 
 
-@register(outgoing=True, pattern=r"^\.google (.*)")
-async def gsearch(q_event):
+@register(outgoing=True, pattern=r"^\.google(?: |$)(\d*)? ?(.*)")
+async def gsearch(event):
     """For .google command, do a Google search."""
-    match = q_event.pattern_match.group(1)
-    page = findall(r"page=\d+", match)
+    if event.is_reply and not event.pattern_match.group(2):
+        match = await event.get_reply_message()
+        match = str(match.message)
+    else:
+        match = str(event.pattern_match.group(2))
+
+    if not match:
+        return await event.edit("**Reply pesan atau Berikan Keyword untuk dicari!**")
+
+    await event.edit("`Processing...`")
+
+    if event.pattern_match.group(1) != "":
+        counter = int(event.pattern_match.group(1))
+        if counter > 10:
+            counter = int(10)
+        if counter <= 0:
+            counter = int(1)
+    else:
+        counter = int(5)
+
+    search_args = (str(match), int(1))
+    gsearch = GoogleSearch()
+
     try:
-        page = page[0]
-        page = page.replace("page=", "")
-        match = match.replace("page=" + page[0], "")
-    except IndexError:
-        page = 1
-    try:
-        search_args = (str(match), int(page))
-        gsearch = GoogleSearch()
         gresults = await gsearch.async_search(*search_args)
-        msg = ""
-        for i in range(5):
-            try:
-                title = gresults["titles"][i]
-                link = gresults["links"][i]
-                desc = gresults["descriptions"][i]
-                msg += f"[{title}]({link})\n`{desc}`\n\n"
-            except IndexError:
-                break
     except BaseException as g_e:
-        return await q_event.edit(f"**Error : ** `{g_e}`")
-    await q_event.edit(
+        return await event.edit(f"**ERROR:** `{g_e}`")
+    msg = ""
+
+    for i in range(counter):
+        try:
+            title = gresults["titles"][i]
+            link = gresults["links"][i]
+            desc = gresults["descriptions"][i]
+            msg += f"[{title}]({link})\n`{desc}`\n\n"
+        except IndexError:
+            break
+
+    await event.edit(
         "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
     )
 
