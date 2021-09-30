@@ -18,7 +18,6 @@ from pathlib import Path
 from time import gmtime, strftime
 
 from telethon import events
-from time import gmtime, strftime
 
 from userbot import CMD_HELP, CUSTOM_CMD, LOGSPAMMER, bot
 
