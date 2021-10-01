@@ -8,12 +8,12 @@ import requests
 from userbot import CMD_HELP
 from userbot import CUSTOM_CMD as cmd
 from userbot import bot
-from userbot.events import manbot_cmd
+from userbot.events import man_cmd
 from userbot.modules.sql_helper.globals import gvarstatus
 from userbot.utils import edit_delete, edit_or_reply
 
 
-@bot.on(manbot_cmd(pattern=r"adzan(?:\s|$)([\s\S]*)"))
+@bot.on(man_cmd(pattern=r"adzan(?:\s|$)([\s\S]*)"))
 async def get_adzan(adzan):
     "Shows you the Islamic prayer times of the given city name"
     input_str = adzan.pattern_match.group(1)
