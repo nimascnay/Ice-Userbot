@@ -4,11 +4,12 @@
    Heroku manager for your userbot
 """
 
-import aiohttp
 import asyncio
-import heroku3
 import math
 import os
+
+import aiohttp
+import heroku3
 
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, HEROKU_API_KEY, HEROKU_APP_NAME
 from userbot.events import register
@@ -128,7 +129,7 @@ async def set_var(var):
         await var.edit("**Berhasil Menambahkan Config Vars**")
         await asyncio.sleep(10)
         await var.delete()
-              heroku_var[variable] = value
+        heroku_var[variable] = value
 
 
 """
