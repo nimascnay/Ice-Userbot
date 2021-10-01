@@ -49,7 +49,7 @@ async def variable(var):
                     "**Logger : #SYSTEM**\n\n" "**#LIST_CONFIG_VAR**:\n" f"{msg}",
                 )
                 await var.edit("**Berhasil Mengirim Ke BOTLOG_CHATID**")
-                await asyncio.sleep(20)
+                await asyncio.sleep(30)
                 await var.delete()
                 return True
             else:
@@ -64,7 +64,7 @@ async def variable(var):
                     f"`{variable}` **=** `{heroku_var[variable]}`\n",
                 )
                 await var.edit("**Berhasil Mengirim Ke BOTLOG_CHATID**")
-                await asyncio.sleep(20)
+                await asyncio.sleep(30)
                 await var.delete()
                 return True
             else:
@@ -102,7 +102,8 @@ async def variable(var):
             return True
 
 
-@register(outgoing=True, pattern=r"^\.(set var|setvar) (\w*) ([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.set var (\w*) ([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.setvar (\w*) ([\s\S]*)")
 async def set_var(var):
     if app is None:
         return await var.edit(
@@ -129,7 +130,7 @@ async def set_var(var):
                 f"`{variable}` **=** `{value}`",
             )
         await var.edit("**Berhasil Menambahkan Config Vars**")
-        await asyncio.sleep(20)
+        await asyncio.sleep(30)
         await var.delete()
         heroku_var[variable] = value
 
