@@ -77,6 +77,7 @@ async def variable(var):
             return True
     elif exe == "del":
         await var.edit("`Menghapus Config Vars...`")
+        key = var.pattern_match.group(1).lower()
         variable = var.pattern_match.group(2)
         if variable == "":
             await var.edit("**Mohon Tentukan Config Var Mana Yang ingin Anda Hapus**")
@@ -91,12 +92,12 @@ async def variable(var):
                     "**#SET #VAR_HEROKU #DELETED**\n\n"
                     f"`{variable}`",
                 )
-            await var.edit("**Config Var Berhasil Dihapus**")
+            await var.edit("**Berhasil Menghapus Config Var Heroku**")
             await asyncio.sleep(20)
             await var.delete()
             del heroku_var[variable]
         else:
-            await var.edit("**Tidak Dapat Menemukan Config Vars**")
+            await var.edit(f"**Tidak Dapat Menemukan Config Var {key}**")
             await asyncio.sleep(20)
             await var.delete()
             return True
