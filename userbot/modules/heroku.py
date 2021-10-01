@@ -33,7 +33,7 @@ else:
 async def variable(var):
     exe = var.pattern_match.group(1)
     if app is None:
-        await var.edit("**[HEROKU]" "\nHarap Siapkan** `HEROKU_APP_NAME`")
+        await var.edit("**[HEROKU]" "\nSilahkan Tambahkan Var** `HEROKU_APP_NAME`")
         return False
     if exe == "get":
         await var.edit("`Mendapatkan Informasi...`")
@@ -72,14 +72,16 @@ async def variable(var):
                 return False
         else:
             await var.edit("**Informasi Tidak Ditemukan**")
-            await asyncio.sleep(10)
+            await asyncio.sleep(20)
             await var.delete()
             return True
     elif exe == "del":
         await var.edit("`Menghapus Config Vars...`")
         variable = var.pattern_match.group(2)
         if variable == "":
-            await var.edit("`Mohon Tentukan Config Vars Yang Mau Anda Hapus`")
+            await var.edit("**Mohon Tentukan Config Var Mana Yang ingin Anda Hapus**")
+            await asyncio.sleep(30)
+            await var.delete()
             return False
         if variable in heroku_var:
             if BOTLOG:
@@ -100,8 +102,7 @@ async def variable(var):
             return True
 
 
-@register(outgoing=True, pattern=r"^\.setvar (\w*) ([\s\S]*)")
-@register(outgoing=True, pattern=r"^\.set var (\w*) ([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.(set var|setvar) (\w*) ([\s\S]*)")
 async def set_var(var):
     if app is None:
         return await var.edit(
