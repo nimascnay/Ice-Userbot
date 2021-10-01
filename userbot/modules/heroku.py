@@ -102,8 +102,8 @@ async def variable(var):
             return True
 
 
-@register(outgoing=True, pattern=r"^\.set var (\w*) ([\s\S]*)")
 @register(outgoing=True, pattern=r"^\.setvar (\w*) ([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.set var (\w*) ([\s\S]*)")
 async def set_var(var):
     if app is None:
         return await var.edit(
@@ -129,8 +129,8 @@ async def set_var(var):
                 "**#SET #VAR_HEROKU #ADDED**\n\n"
                 f"`{variable}` **=** `{value}`",
             )
-        await var.edit("**Berhasil Menambahkan Config Vars**")
-        await asyncio.sleep(30)
+        await var.edit("**Berhasil Menambahkan Config Var Heroku**")
+        await asyncio.sleep(20)
         await var.delete()
         heroku_var[variable] = value
 
