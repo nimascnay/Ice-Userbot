@@ -4,11 +4,11 @@
    Heroku manager for your userbot
 """
 
+import aiohttp
+import asyncio
+import heroku3
 import math
 import os
-
-import aiohttp
-import heroku3
 
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, HEROKU_API_KEY, HEROKU_APP_NAME
 from userbot.events import register
@@ -27,6 +27,7 @@ else:
 """
 
 
+@register(outgoing=True, pattern=r"^\.(get|del)var(?: |$)(\w*)")
 @register(outgoing=True, pattern=r"^\.(get|del) var(?: |$)(\w*)")
 async def variable(var):
     exe = var.pattern_match.group(1)
@@ -46,6 +47,8 @@ async def variable(var):
                     BOTLOG_CHATID, "#CONFIGVARS\n\n" "**Config Vars**:\n" f"{msg}"
                 )
                 await var.edit("**Berhasil Mengirim Ke BOTLOG_CHATID**")
+                await asyncio.sleep(10)
+                await var.delete()
                 return True
             else:
                 await var.edit("**Mohon Ubah Var** `BOTLOG` **Ke** `True`")
@@ -59,12 +62,16 @@ async def variable(var):
                     f"`{variable}` **=** `{heroku_var[variable]}`\n",
                 )
                 await var.edit("**Berhasil Mengirim Ke BOTLOG_CHATID**")
+                await asyncio.sleep(10)
+                await var.delete()
                 return True
             else:
                 await var.edit("**Mohon Ubah Var** `BOTLOG` **Ke** `True`")
                 return False
         else:
-            await var.edit("`Informasi Tidak Ditemukan...`")
+            await var.edit("**Informasi Tidak Ditemukan**")
+            await asyncio.sleep(10)
+            await var.delete()
             return True
     elif exe == "del":
         await var.edit("`Menghapus Config Vars...`")
@@ -81,12 +88,17 @@ async def variable(var):
                     f"`{variable}`",
                 )
             await var.edit("**Config Vars Telah Dihapus**")
+            await asyncio.sleep(10)
+            await var.delete()
             del heroku_var[variable]
         else:
             await var.edit("**Tidak Dapat Menemukan Config Vars**")
+            await asyncio.sleep(10)
+            await var.delete()
             return True
 
 
+@register(outgoing=True, pattern=r"^\.setvar (\w*) ([\s\S]*)")
 @register(outgoing=True, pattern=r"^\.set var (\w*) ([\s\S]*)")
 async def set_var(var):
     if app is None:
@@ -113,8 +125,10 @@ async def set_var(var):
                 "**#SET #VAR_HEROKU #ADDED**\n\n"
                 f"`{variable}` **=** `{value}`",
             )
-        await var.edit("`Menambahkan Config Vars...`")
-    heroku_var[variable] = value
+        await var.edit("**Berhasil Menambahkan Config Vars**")
+        await asyncio.sleep(10)
+        await var.delete()
+              heroku_var[variable] = value
 
 
 """
