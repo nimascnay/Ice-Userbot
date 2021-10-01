@@ -45,7 +45,8 @@ async def variable(var):
                     f"`{item}` = `{configvars[item]}`\n" for item in configvars
                 )
                 await var.client.send_message(
-                    BOTLOG_CHATID, "**Logger : #SYSTEM**\n\n" "**#LIST_CONFIG_VAR**:\n" f"{msg}"
+                    BOTLOG_CHATID,
+                    "**Logger : #SYSTEM**\n\n" "**#LIST_CONFIG_VAR**:\n" f"{msg}",
                 )
                 await var.edit("**Berhasil Mengirim Ke BOTLOG_CHATID**")
                 await asyncio.sleep(20)
