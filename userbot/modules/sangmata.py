@@ -12,7 +12,7 @@ from userbot.events import register
 from userbot.utils import _format, edit_delete, edit_or_reply
 
 
-@register(outgoing=True, pattern=r"^\.sg(u)?(?:\s|$)([\s\S]*)")
+@register(outgoing=True, pattern=r"^\.(sa|sg)(u)?(?:\s|$)([\s\S]*)")
 async def _(event):
     "To get name/username history."
     input_str = "".join(event.text.split(maxsplit=1)[1:])
