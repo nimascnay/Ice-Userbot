@@ -11,7 +11,9 @@
 
 
 from asyncio import sleep
+
 from telethon.errors import rpcbaseerrors
+
 from userbot import CMD_HELP, DEVS
 from userbot.events import register
 
@@ -108,6 +110,7 @@ async def selfdestruct(destroy):
 
 purgechat = {}
 
+
 @register(outgoing=True, pattern=r"^\.(p|purge)(from$|to$)")
 async def purgfromto(prgnew):
     reply = await prgnew.get_reply_message()
@@ -121,18 +124,24 @@ async def purgfromto(prgnew):
         await sleep(4)
         await prgnew.delete()
 
+
 async def purgfrm(prgfrm):
     prgstrtmsg = prgfrm.reply_to_msg_id
     purgechat[prgfrm.chat_id] = prgstrtmsg
-    aa = await prgfrm.edit("**Pesan ini telah dipilih sebagai awal menghapus, balas pesan lain dengan** `.purgeto` **untuk menghapusnya**")
+    aa = await prgfrm.edit(
+        "**Pesan ini telah dipilih sebagai awal menghapus, balas pesan lain dengan** `.purgeto` **untuk menghapusnya**"
+    )
     await sleep(2)
     await aa.delete()
+
 
 async def purgto(prgto):
     try:
         prgstrtmsg = purgechat[prgto.chat_id]
     except KeyError:
-        aa = await prgto.edit("**Balas pesan dengan** `.purgefrom` **terlebih dahulu lalu gunakan** `.purgeto`")
+        aa = await prgto.edit(
+            "**Balas pesan dengan** `.purgefrom` **terlebih dahulu lalu gunakan** `.purgeto`"
+        )
         await sleep(2)
         await aa.delete()
         return
@@ -141,17 +150,20 @@ async def purgto(prgto):
         prgendmsg = prgto.reply_to_msg_id
         pmsgs = []
         msgz = 0
-        async for msg in prgto.client.iter_messages(prgto.chat_id, min_id=(prgstrtmsg - 1), max_id=(prgendmsg + 1)):
+        async for msg in prgto.client.iter_messages(
+            prgto.chat_id, min_id=(prgstrtmsg - 1), max_id=(prgendmsg + 1)
+        ):
             pmsgs.append(msg)
             msgz += 1
             pmsgs.append(prgto.reply_to_msg_id)
             if len(pmsgs) == 100:
                 await prgto.client.delete_messages(chat, msgs)
-                msgs = []
         if pmsgs:
             await prgto.client.delete_messages(chat, pmsgs)
             await prgto.delete()
-        man = await prgto.reply(f"**Fast purge complete!**\n**Purged** `{str(msgz)}` **messages**")
+        man = await prgto.reply(
+            f"**Fast purge complete!**\n**Purged** `{str(msgz)}` **messages**"
+        )
         await sleep(5)
         await man.delete()
     except Exception as er:
