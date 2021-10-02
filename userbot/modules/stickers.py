@@ -27,10 +27,10 @@ from userbot import bot
 from userbot.events import register
 
 KANGING_STR = [
-    "Wao.,Bagus Nih...Colong Dulu Yekan..",
-    "Colong Sticker dulu yee kan",
+    "Waw.,Comel Nih...Minta Ya..",
+    "Makasih, Iya Sama-sama",
     "ehh, mantep nih.....aku colong ya...",
-    "Ini Sticker aku colong yaa DUARR!",
+    "Ini Sticker aku colong yee!",
     "leh ugha ni Sticker Colong ahh~",
 ]
 
