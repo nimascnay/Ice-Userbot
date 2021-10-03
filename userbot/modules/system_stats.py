@@ -227,7 +227,7 @@ async def amireallyalive(alive):
     user = await bot.get_me()
     uptime = await get_readable_time((time.time() - StartTime))
     output = (
-        f" **┗┓ 🌸 Ｉｃｅ USERBOT 🌸 ┏┛** \n"
+        f" **┗┓ ❄ Ｉｃｅ USERBOT ❄ ┏┛** \n"
         f"\n**{ALIVE_TEKS_CUSTOM}**\n"
         f"**━━━━━━━━━━━━━━━**\n"
         f"**🌸 Queen 🌸** \n"
