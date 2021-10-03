@@ -227,12 +227,12 @@ async def amireallyalive(alive):
     user = await bot.get_me()
     uptime = await get_readable_time((time.time() - StartTime))
     output = (
-        f" **┗┓ ✮ {DEFAULTUSER} USERBOT ✮ ┏┛** \n"
+        f" **┗┓ 🌸 Ｉｃｅ USERBOT 🌸 ┏┛** \n"
         f"\n**{ALIVE_TEKS_CUSTOM}**\n"
         f"**━━━━━━━━━━━━━━━**\n"
-        f"**✮ Master ✮** \n"
+        f"**🌸 Queen 🌸** \n"
         f" ➥ `{DEFAULTUSER}` \n"
-        f"**✮ Username ✮** \n"
+        f"**🌸 Username 🌸** \n"
         f" ➥ `@{user.username}` \n"
         f"┏━━━━━━━━━━━━━━━━\n"
         f"┣ ✥ `Telethon : `Ver {version.__version__} \n"
@@ -241,9 +241,9 @@ async def amireallyalive(alive):
         f"┣ ✥ `Modules  : `{len(modules)} \n"
         f"┣ ✥ `Uptime   : `{uptime} \n"
         f"┗━━━━━━━━━━━━━━━━ \n"
-        f"⚡️ **Repo Userbot :** [Man-Userbot](https://github.com/mrismanaziz/Man-Userbot) \n"
-        f"⚡️ **Grup Userbot :** [Tekan Disini](https://t.me/sharinguserbot) \n"
-        f"⚡️ **Owner :** [Risman](t.me/mrismanaziz) \n"
+        f"🦄 **Repo Userbot :** [Ｉｃｅ-Userbot](https://github.com/nimascnay/Ice-Userbot) \n"
+        f"🦄 **Grup Userbot :** [Tekan Disini](https://t.me/sharinguserbot) \n"
+        f"🦄 **Owner :** [cecα](t.me/mieayamdebess) \n"
     )
     if ALIVE_LOGO:
         try:
