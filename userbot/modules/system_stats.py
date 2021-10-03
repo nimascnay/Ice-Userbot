@@ -309,15 +309,15 @@ async def amireallyalive(alive):
     await bot.get_me()
     uptime = await get_readable_time((time.time() - StartTime))
     output = (
-        f"**[Man-Userbot](https://github.com/mrismanaziz/Man-Userbot) is Up and Running.**\n\n"
-        f"**{ALIVE_TEKS_CUSTOM}**\n\n"
-        f"{ALIVE_EMOJI} **Master :** `{DEFAULTUSER}` \n"
-        f"{ALIVE_EMOJI} **Modules :** `{len(modules)} Modules` \n"
-        f"{ALIVE_EMOJI} **Bot Version :** `{BOT_VER}` \n"
-        f"{ALIVE_EMOJI} **Python Version :** `{python_version()}` \n"
-        f"{ALIVE_EMOJI} **Telethon Version :** `{version.__version__}` \n"
-        f"{ALIVE_EMOJI} **Bot Uptime :** `{uptime}` \n\n"
-        "    **[𝗦𝘂𝗽𝗽𝗼𝗿𝘁](https://t.me/sharinguserbot)** | **[𝗖𝗵𝗮𝗻𝗻𝗲𝗹](https://t.me/Lunatic0de)** | **[𝗢𝘄𝗻𝗲𝗿](t.me/mrismanaziz)**"
+        f"**[Ｉｃｅ-Userbot](https://github.com/mrismanaziz/Man-Userbot) is Up and Running.**\n\n"
+        f"**GW CAKEP😎**\n\n"
+        f"👸 **Princess :** `{DEFAULTUSER}` \n"
+        f"🗂 **Modules :** `{len(modules)} Modules` \n"
+        f"🦄 **Bot Version :** `{BOT_VER}` \n"
+        f"🐣 **Python Version :** `{python_version()}` \n"
+        f"🌼 **Telethon Version :** `{version.__version__}` \n"
+        f"🎀 **Bot Uptime :** `{uptime}` \n\n"
+        "    **[𝗜𝗻𝘀𝘁𝗮𝗴𝗿𝗮𝗺](https://instagram.com/nimascnay?utm_medium=copy_link)** | **[𝗖𝗵𝗮𝗻𝗻𝗲𝗹](https://t.me/setitikrasahati)** | **[𝗢𝘄𝗻𝗲𝗿](t.me/mieayamdebess)**"
     )
     if ALIVE_LOGO:
         try:
