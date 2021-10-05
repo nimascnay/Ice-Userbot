@@ -141,7 +141,7 @@ async def repo_is_here(wannasee):
         f"**Hey**, __I am using__ ❄ **Ｉｃｅ-Userbot** ❄\n\n"
         f"      __Thanks For Using me__\n\n"
         f"🦋 **Userbot Version :** `{BOT_VER}@{UPSTREAM_REPO_BRANCH}`\n"
-        f"🌸 **Group Support :** [Sharing Userbot](t.me/sharinguserbot)\n"
+        f"🌸 **Group mutualan :** [Cari Teman Virtual](https://t.me/CariTeman_Virtuall)\n"
         f"🦋 **Ig ceca :** [nimascnay](https://instagram.com/nimascnay?utm_medium=copy_link)\n"
         f"🌸 **Owner Repo :** [Ceca](t.me/mieayamdebess)\n"
         f"🦋 **Repo :** [Ｉｃｅ-Userbot](https://github.com/nimascnay/Ice-Userbot)\n"
