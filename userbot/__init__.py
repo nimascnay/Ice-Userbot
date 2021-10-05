@@ -175,7 +175,7 @@ ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
 ALIVE_EMOJI = os.environ.get("ALIVE_EMOJI", "⚡️")
 
 # Custom icon HELP
-ICON_HELP = os.environ.get("ICON_HELP", "❉")
+ICON_HELP = os.environ.get("ICON_HELP", "🌸")
 
 # Time & Date - Country and Time Zone
 COUNTRY = str(os.environ.get("COUNTRY", "ID"))
@@ -191,10 +191,10 @@ ZIP_DOWNLOAD_DIRECTORY = os.environ.get("ZIP_DOWNLOAD_DIRECTORY", "./zips")
 BITLY_TOKEN = os.environ.get("BITLY_TOKEN", None)
 
 # Bot Name
-TERM_ALIAS = os.environ.get("TERM_ALIAS", "Man-Userbot")
+TERM_ALIAS = os.environ.get("TERM_ALIAS", "Ｉｃｅ-Userbot")
 
 # Bot version
-BOT_VER = os.environ.get("BOT_VER", "0.6.9")
+BOT_VER = os.environ.get("BOT_VER", "5.5.0")
 
 # Default .alive username
 ALIVE_USERNAME = os.environ.get("ALIVE_USERNAME", None)
