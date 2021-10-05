@@ -31,7 +31,7 @@ LOGS.info(
     f"Jika {ALIVE_NAME} Membutuhkan Bantuan, Silahkan Gabung ke Grup https://t.me/SharingUserbot")
 
 LOGS.info(
-    f"Man-Userbot ⚙️ V{BOT_VER} [🔥 BERHASIL DIAKTIFKAN! 🔥]")
+    f"Ｉｃｅ-Userbot ⚙️ V{BOT_VER} [🐣 BERHASIL DIAKTIFKAN! 🌼]")
 
 
 if len(sys.argv) not in (1, 3, 4):
