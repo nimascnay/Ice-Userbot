@@ -310,7 +310,7 @@ async def amireallyalive(alive):
     uptime = await get_readable_time((time.time() - StartTime))
     output = (
         f"**[Ｉｃｅ-Userbot](https://github.com/mrismanaziz/Man-Userbot) is Up and Running.**\n\n"
-        f"**GW CAKEP😎**\n\n"
+        f"**{ALIVE_TEKS_CUSTOM}**\n\n"
         f"👸 **Princess :** `{DEFAULTUSER}` \n"
         f"🗂 **Modules :** `{len(modules)} Modules` \n"
         f"🦄 **Bot Version :** `{BOT_VER}` \n"
