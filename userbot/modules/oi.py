@@ -15,6 +15,19 @@ async def typewriter(typew):
     await typew.edit("**I LOVE YOU 💞**")
 
 
+@register(outgoing=True, pattern=r"^\.ceca(?: |$)(.*)")
+async def typewriter(typew):
+    typew.pattern_match.group(1)
+    sleep(1.5)
+    await typew.edit("**Hy**")
+    sleep(1.5)
+    await typew.edit("**salken💅🏻**")
+    sleep(1.5)
+    await typew.edit("**princess ceca🦄**")
+    sleep(1.5)
+    await typew.edit("**call me ceca🐻**")
+
+
 # Create by myself @localheart
 
 
