@@ -29,7 +29,6 @@ async def typewriter(typew):
     await typew.edit("**Assalamualaikum...**")
 
 
-
 @register(outgoing=True, pattern=r"^\.l(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
