@@ -37,7 +37,7 @@ async def typewriter(typew):
 
 @register(outgoing=True, pattern=r"^\.ceca(?: |$)(.*)")
 async def typewriter(typew):
-     typew.pattern_match.group(1)
+    typew.pattern_match.group(1)
     sleep(2)
     await typew.edit("**Hy**")
     sleep(2)
