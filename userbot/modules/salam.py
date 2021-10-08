@@ -35,16 +35,16 @@ async def typewriter(typew):
     await typew.edit("**Wa'alaikumsalam**")
 
 
-@register(outgoing=True, pattern=r"^\.ceca(?: |$)(.*)")
+@register(outgoing=True, pattern=r"^\.ceca(?:|$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
-    sleep(2)
+    sleep(1.5)
     await typew.edit("**Hy**")
-    sleep(2)
+    sleep(1.5)
     await typew.edit("**salken💅🏻**")
-    sleep(1)
+    sleep(1.5)
     await typew.edit("**princess ceca🦄**")
-    sleep(2)
+    sleep(1.5)
     await typew.edit("**call me ceca🐻**")
 
 
