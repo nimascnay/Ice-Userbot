@@ -35,7 +35,7 @@ async def typewriter(typew):
     await typew.edit("**Wa'alaikumsalam**")
 
 
-@register(outgoing=True, pattern=r"^\.ceca(?:|$)(.*)")
+@register(outgoing=True, pattern=r"^\.ceca(?: |$)(.*)")
 async def typewriter(typew):
     typew.pattern_match.group(1)
     sleep(1.5)
