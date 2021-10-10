@@ -74,7 +74,7 @@ async def pingme(pong):
 async def _(man):
     await man.reply(random.choice(absen))
 
-)
+
 
 @register(outgoing=True, pattern=r"^\.xping$")
 async def pingme(pong):
