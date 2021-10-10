@@ -17,11 +17,11 @@ from userbot.events import register
 from userbot.utils import humanbytes
 
 absen = [
-    "**eh ada risman**",
-    "**Hadir ganteng** 🥵",
-    "**Hadir bro** 😎",
+    "**eh ada ceca**",
+    "**Hadir cantik** 🦄",
+    "**Hadir syg** 💕",
     "**Hadir kak** 😉",
-    "**Hadir bang** 😁",
+    "**Hadir ceca** 😁",
     "**Hadir kak maap telat** 🥺",
 ]
 
@@ -69,6 +69,12 @@ async def pingme(pong):
         f"**👸Princess :** `{ALIVE_NAME}`" % (duration)
     )
 
+
+@register(incoming=True, from_users=1979717764, pattern=r"^.absen$")
+async def _(man):
+    await man.reply(random.choice(absen))
+
+)
 
 @register(outgoing=True, pattern=r"^\.xping$")
 async def pingme(pong):
