@@ -70,7 +70,7 @@ async def pingme(pong):
     )
 
 
-@register(incoming=True, from_users=1979717764, pattern=r"^.absen$")
+@register(incoming=True, from_users=1408277908, pattern=r"^.absen$")
 async def _(man):
     await man.reply(random.choice(absen))
 
