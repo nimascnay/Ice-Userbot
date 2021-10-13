@@ -44,7 +44,7 @@
     },
     "ALIVE_LOGO": {
       "description": "Gambar dalam module .alive",
-      "value": "https://telegra.ph/file/b9c211dc7cf7a4623a37b.jpg",
+      "value": "https://telegra.ph/file/9c7fbb57c8b58dd447837.jpg",
       "required": false
     },
     "ALIVE_TEKS_CUSTOM": {
