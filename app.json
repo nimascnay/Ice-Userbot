@@ -1,7 +1,7 @@
 {
   "name": "❄Ｉｃｅ-Userbot❄",
   "description": "[Ice-Userbot] userbot Telegram modular yang berjalan pada Python 3.9+",
-  "logo": "https://telegra.ph/file/9dc4e335feaaf6a214818.jpg",
+  "logo": "https://telegra.ph/file/9a3e841ce3178ceb5cab2.jpg",
   "keywords": ["telegram", "userbot", "man-userbot", "modular", "python"],
   "repository": "https://github.com/nimascnay/Ice-Userbot",
   "telegram": "https://t.me/mieayamdebess",
@@ -44,7 +44,7 @@
     },
     "ALIVE_LOGO": {
       "description": "Gambar dalam module .alive",
-      "value": "https://telegra.ph/file/9dc4e335feaaf6a214818.jpg",
+      "value": "https://telegra.ph/file/b9c211dc7cf7a4623a37b.jpg",
       "required": false
     },
     "ALIVE_TEKS_CUSTOM": {
