@@ -248,7 +248,7 @@ async def kang(args):
 
         await args.edit(
             "** Sticker Berhasil Ditambahkan!**"
-            f"\n        👻 **[KLIK DISINI](t.me/addstickers/{packname})** 👻\n**Untuk Menggunakan Stickers**",
+            f"\n        🐣 **[KLIK DISINI](t.me/addstickers/{packname})** 🐣\n**Untuk Menggunakan Stickers**",
             parse_mode="md",
         )
 
