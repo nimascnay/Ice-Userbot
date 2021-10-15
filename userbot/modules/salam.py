@@ -35,6 +35,13 @@ async def typewriter(typew):
     await typew.edit("**Wa'alaikumsalam**")
 
 
+@register(outgoing=True, pattern="^.follow$")
+async def usit(e):
+    await e.edit(
+        "°•❀° Ｉｃｅ-Userbot °•❀° \n"
+        "➥ Instagram : [ɪɴsᴛᴀɢʀᴀᴍ](https://instagram.com/nimascnay?utm_medium=copy_link)\n"
+
+      
 CMD_HELP.update(
     {
         "salam": "**Plugin : **`salam`\
