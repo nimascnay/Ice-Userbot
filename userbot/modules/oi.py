@@ -32,7 +32,7 @@ async def typewriter(typew):
 async def usit(e):
     await e.edit(
         "°•❀° Ｉｃｅ-Userbot °•❀° \n"
-        "➥ Instagram : [ɪɴsᴛᴀɢʀᴀᴍ](https://instagram.com/nimascnay?utm_medium=copy_link)\n"
+        "➥ Instagram : [ɪɴsᴛᴀɢʀᴀᴍ](https://instagram.com/nimascnay)\n"
 
 
 # Create by myself @localheart
