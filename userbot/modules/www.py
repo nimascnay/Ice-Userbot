@@ -66,7 +66,7 @@ async def pingme(pong):
         f"**🍼PONG!!**\n"
         f"🧸 **Ping** - `%sms`\n"
         f"🎀 **Waktu Bermain -** `{uptime}` \n"
-        f"**👸Princess :** `{ALIVE_NAME}`" % (duration)
+        f"**°•❀ᴍʏ ɴᴀᴍᴇ :** `{ALIVE_NAME}`" % (duration)
     )
 
 
