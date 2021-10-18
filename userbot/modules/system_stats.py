@@ -317,7 +317,7 @@ async def amireallyalive(alive):
         f"🐣 **Python Version :** `{python_version()}` \n"
         f"🌼 **Telethon Version :** `{version.__version__}` \n"
         f"🎀 **Bot Uptime :** `{uptime}` \n\n"
-        "    **[𝗜𝗻𝘀𝘁𝗮𝗴𝗿𝗮𝗺](https://instagram.com/nimascnay?utm_medium=copy_link)** | **[𝗖𝗵𝗮𝗻𝗻𝗲𝗹](https://t.me/setitikrasahati)** | **[𝗢𝘄𝗻𝗲𝗿](t.me/mieayamdebess)**"
+        "    **[𝗜𝗻𝘀𝘁𝗮𝗴𝗿𝗮𝗺](https://instagram.com/nimascnay?utm_medium=copy_link)** | **[𝗖𝗵𝗮𝗻𝗻𝗲𝗹](https://t.me/moodlychannel)** | **[𝗢𝘄𝗻𝗲𝗿](t.me/mieayamdebess)**"
     )
     if ALIVE_LOGO:
         try:
