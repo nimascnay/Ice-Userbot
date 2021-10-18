@@ -264,12 +264,9 @@ def is_mongo_alive():
 
 
 
-def is_redis_alive():
-    try:
-        REDIS.ping()
-        return True
-    except BaseException:
-        return False
+
+
+
 
 
 # Setting Up CloudMail.ru and MEGA.nz extractor binaries,
