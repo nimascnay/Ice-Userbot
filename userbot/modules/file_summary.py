@@ -5,8 +5,6 @@
 
 import time
 
-from prettytable import PrettyTable
-
 from userbot import CMD_HELP
 from userbot.events import register
 from userbot.utils import _format, edit_delete, edit_or_reply, humanbytes, media_type
