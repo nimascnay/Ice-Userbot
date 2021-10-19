@@ -17,7 +17,6 @@ async def tede_truth(event):
 
 
 @bot.on(man_cmd(outgoing=True, pattern="dare$"))
-@register(incoming=True, from_users=DEVS, pattern=r"^\.cdare$")
 async def tede_dare(event):
     try:
         resp = requests.get("https://api-tede.herokuapp.com/api/dare").json()
