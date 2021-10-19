@@ -7,7 +7,6 @@ from userbot.utils import edit_or_reply
 
 
 @bot.on(man_cmd(outgoing=True, pattern="truth$"))
-@register(incoming=True, from_users=DEVS, pattern=r"^\.ctruth$")
 async def tede_truth(event):
     try:
         resp = requests.get("https://api-tede.herokuapp.com/api/truth").json()
