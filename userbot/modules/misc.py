@@ -140,7 +140,6 @@ async def repo_is_here(wannasee):
     await wannasee.edit(
         f"**Hey**, __I am using__  **Ｉｃｅ-Userbot🦋** \n\n"
         f"      __Thanks For Using me__\n\n"
-        f"❀ **Channel ceca :** [Setitik Rasa](https://t.me/moodlychannel)\n"
         f"❀ **Ig ceca :** [nimascnay](https://instagram.com/nimascnay?utm_medium=copy_link)\n"
         f"❀ **Owner Repo :** [Ceca](t.me/mieayamdebess)\n"
         f"❀ **Repo :** [Ｉｃｅ-Userbot](https://github.com/nimascnay/Ice-Userbot)\n"
